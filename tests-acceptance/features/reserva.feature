@@ -27,7 +27,7 @@ Given: “César” é um petiano cadastrado no sistema com a senha “Pão_Com_
 AND: Há uma reserva no sistema para o livro “Cracking the Coding Interview” de id “001”no intervalo de “25/08/2019” Até “01/09/2019 em nome de “César”.
 AND: Estou na página “Minhas Reservas”.
 AND: Estou logado como “César”
-WHEN: Eu solicito o cancelamento da reserva do livro “Cracking the Coding Interview” de id “001” no intervalo de “25/08/2019” até “01/09/2019”.
+WHEN: Eu solicito o cancelamento da reserva do livro de id “001”.
 THEN: Eu recebo uma mensagem confirmando o cancelamento.
 AND: Não há nenhuma reserva no sistema para o livro “Cracking the Coding Interview” de id “001” no intervalo de “25/08/2019” até “01/09/2019”.
 

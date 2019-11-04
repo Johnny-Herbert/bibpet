@@ -18,17 +18,6 @@ defineSupportCode(function ({ Given, When, Then }) {
         await $("a[name='loginbutton']").click();
     })
 
-    Given(/^Estou na página “(\d*)”.$/, async (pageName) => {
-        await request.post(base_url + "cadastrarPetiano", petiano).then(body =>{
-            expect(body).toEqual({success: "O petiano foi cadastrado com sucesso"});
-        })
-        await browser.get("http://localhost:4200/");
-        await expect(browser.getTitle()).to.eventually.equal('BibPET');
-        await $("input[name='loginbox']").sendKeys(<string> login);
-        await $("input[name='senhabox']").sendKeys(<string> senha);
-        await $("a[name='loginbutton']").click();
-    })
-
     Given(/^O livro “(\d*)” esta cadastrado com o tempo máximo de reserva sendo “(\d*)”, seu dono Sendo “(\d*)”, seu tema sendo “(\d*)” e seu id sendo “(\d*)”.$/, 
     async (nome,tempoMax,dono,tema,id) => {
         var livro = {"json":{"nome": nome,"tempoMax": tempoMax,"dono": dono,"tema": 
@@ -87,17 +76,6 @@ defineSupportCode(function ({ Given, When, Then }) {
         await $("a[name='loginbutton']").click();
     })
 
-    Given(/^Estou na página “(\d*)”.$/, async (pageName) => {
-        await request.post(base_url + "cadastrarPetiano", petiano).then(body =>{
-            expect(body).toEqual({success: "O petiano foi cadastrado com sucesso"});
-        })
-        await browser.get("http://localhost:4200/");
-        await expect(browser.getTitle()).to.eventually.equal('BibPET');
-        await $("input[name='loginbox']").sendKeys(<string> login);
-        await $("input[name='senhabox']").sendKeys(<string> senha);
-        await $("a[name='loginbutton']").click();
-    })
-
     Given(/^O livro “(\d*)” esta cadastrado no sistema com o tempo máximo de reserva sendo “(\d*)”, seu dono Sendo “(\d*)”, seu tema sendo “(\d*)” e seu id sendo “(\d*)”.$/, 
     async (nome,tempoMax,dono,tema,id) => {
         var livro = {"json":{"nome": nome,"tempoMax": tempoMax,"dono": dono,"tema": 
@@ -142,4 +120,50 @@ defineSupportCode(function ({ Given, When, Then }) {
         })
     });
 
+})
+//Issue #16
+defineSupportCode(function ({ Given, When, Then }) {
+    Given(/^"(\d*)" e um petiano cadastrado no sistema com a senha “(\d*)”.".$/, async (login,senha) => {
+        var petiano = {"json":{"login": login, "senha": senha}};
+        await request.post(base_url + "cadastrarPetiano", petiano).then(body =>{
+            expect(body).toEqual({success: "O petiano foi cadastrado com sucesso"});
+        })
+        await browser.get("http://localhost:4200/");
+        await expect(browser.getTitle()).to.eventually.equal('BibPET');
+        await $("input[name='loginbox']").sendKeys(<string> login);
+        await $("input[name='senhabox']").sendKeys(<string> senha);
+        await $("a[name='loginbutton']").click();
+    })
+
+    Given(/^Há uma  reserva no sistema para o livro "(\d*)" de id "(\d*)" no intervalo de "(\d*)" até "(\d*)" em nome de "(\d*)".$/,
+         async (nome,id,dtInicial,dtFinal,petiano) => {
+        var reserva = {"nome": nome,"id":id,"dtInicial": dtInicial,
+        "dtFinal":dtFinal,"petiano":petiano};
+        await request.get(base_url + "reservas").then(body =>{
+            expect(body).toContain(reserva);
+        })
+    });
+
+    Given(/^Estou na página "(\d*)".$/, async (pagina) => {
+        await element(by.buttonText(pagina)).click();
+    });
+
+    When(/^Eu solicito o cancelamento da reserva do livro de id "(\d*).$/,
+     async (nome,id,dtInicial,dtFinal) => {
+        await element(by.cellText(id)).select();
+        await element(by.buttonText('cancelar')).click();
+    });
+
+    Then(/^Eu recebo uma mensagem confirmando o cancelamento reserva.$/, async () => {
+        await $("label[name='mensagem']").getText().equal('Reserva Cancelada');
+    });
+
+    Then(/^Não há uma  reserva no sistema para o livro "(\d*)" de id "(\d*)" no intervalo de "(\d*)" até "(\d*)" em nome de "(\d*)".$/,
+         async (nome,id,dtInicial,dtFinal,petiano) => {
+        var reserva = {"nome": nome,"id":id,"dtInicial": dtInicial,
+        "dtFinal":dtFinal,"petiano":petiano};
+        await request.get(base_url + "reservas").then(body =>{
+            expect(body).not.toContain(reserva);
+        })
+    })
 })
