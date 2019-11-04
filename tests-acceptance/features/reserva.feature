@@ -37,6 +37,6 @@ AND: Há uma reserva no sistema para o livro “Cracking the Coding Interview”
 AND: Não há nenhuma reserva no sistema para o livro “Cracking the Coding Interview” de id “001” no intervalo de “02/08/2019” Até “05/09/2019 em nome de “César”.
 AND: Estou na página “Minhas Reservas”.
 AND: Estou logado como “César”
-WHEN: Eu solicito a extensão da reserva do livro “Cracking the Coding Interview” de id “001” no intervalo de “25/08/2019” até “05/09/2019”.
+WHEN: Eu solicito a extensão da reserva do livro de id “001” no intervalo de “25/08/2019” até “05/09/2019”.
 THEN: Eu recebo uma mensagem confirmando a extensão.
 AND: Há uma reserva no sistema para o livro “Cracking the Coding Interview” de id “001” no intervalo de “25/08/2019” até “05/09/2019” em nome de “César”.

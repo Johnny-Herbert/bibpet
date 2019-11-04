@@ -167,3 +167,51 @@ defineSupportCode(function ({ Given, When, Then }) {
         })
     })
 })
+//Issue #17
+defineSupportCode(function ({ Given, When, Then }) {
+    Given(/^"(\d*)" e um petiano cadastrado no sistema com a senha “(\d*)”.".$/, async (login,senha) => {
+        var petiano = {"json":{"login": login, "senha": senha}};
+        await request.post(base_url + "cadastrarPetiano", petiano).then(body =>{
+            expect(body).toEqual({success: "O petiano foi cadastrado com sucesso"});
+        })
+        await browser.get("http://localhost:4200/");
+        await expect(browser.getTitle()).to.eventually.equal('BibPET');
+        await $("input[name='loginbox']").sendKeys(<string> login);
+        await $("input[name='senhabox']").sendKeys(<string> senha);
+        await $("a[name='loginbutton']").click();
+    })
+
+    Given(/^Há uma  reserva no sistema para o livro "(\d*)" de id "(\d*)" no intervalo de "(\d*)" até "(\d*)" em nome de "(\d*)".$/,
+         async (nome,id,dtInicial,dtFinal,petiano) => {
+        var reserva = {"nome": nome,"id":id,"dtInicial": dtInicial,
+        "dtFinal":dtFinal,"petiano":petiano};
+        await request.get(base_url + "reservas").then(body =>{
+            expect(body).toContain(reserva);
+        })
+    });
+
+    Given(/^Estou na página "(\d*)".$/, async (pagina) => {
+        await element(by.buttonText(pagina)).click();
+    });
+
+    When(/^Eu solicito a extensão da reserva do livro de id "(\d*)" no intervalo de "(\d*)" até "(\d*)".$/,
+     async (id,dtInicial,dtFinal) => {
+        await element(by.cellText(id)).select();
+        await $("input[name='dtInicialBox']").sendKeys(<string> dtInicial);
+        await $("input[name='dtFinalBox']").sendKeys(<string> dtFinal);
+        await element(by.buttonText('estender')).click();
+    });
+
+    Then(/^Eu recebo uma mensagem confirmando a extensão reserva.$/, async () => {
+        await $("label[name='mensagem']").getText().equal('Reserva Estendida');
+    });
+
+    Then(/^Há uma  reserva no sistema para o livro "(\d*)" de id "(\d*)" no intervalo de "(\d*)" até "(\d*)" em nome de "(\d*)".$/,
+         async (nome,id,dtInicial,dtFinal,petiano) => {
+        var reserva = {"nome": nome,"id":id,"dtInicial": dtInicial,
+        "dtFinal":dtFinal,"petiano":petiano};
+        await request.get(base_url + "reservas").then(body =>{
+            expect(body).toContain(reserva);
+        })
+    });
+})
