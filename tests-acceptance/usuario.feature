@@ -20,3 +20,12 @@ And The book status is “Disponível”
 And I see a “Peguei o livro” option
 When I check “Peguei o livro” option
 Then The “Book status” is now “emprestado” by “Vitor Sousa”
+
+Scenario: Confirmar devolução na data posterior
+Given I am at “Cracking the Code” “Book” page logged as “Vitor Sousa”
+And I see the “Cracking the Code” details 
+And The book status is “emprestado”
+And I see a “Devolver o livro” option
+And The “Book devolution status” is “no prazo”
+When I check “Devolver o livro” option
+Then The “Book status” is now “disponível”
