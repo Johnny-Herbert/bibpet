@@ -7,3 +7,8 @@ Given I am at some “Login” page not logged
 When I fill login as “PET-Admin” and password “admin”
 And I see a warning telling that I’m now logged as “System Admin”
 Then I am at “System Management” page
+
+Scenario: Tela de Login verifica se é usuário ou administrador
+Given I am at some “Login” page not logged
+When I fill login as “vss2@pet.cin.ufpe.br” and password “012345689”
+Then I am at “Home” page logged as "Vitor Sousa"
