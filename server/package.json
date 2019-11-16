@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "description": "servidor do bibpet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "./node_modules/typescript/bin/tsc",
+    "start": "npm run tsc && node compiledCode/server.js"
+  },
+  "author": "Jose Guilherme, Johnny Herbert, Samuel Oliveira, Vitor Souza e Cesar Silva",
+  "license": "ISC",
+  "dependencies": {
+    "@types/body-parser": "^1.17.1",
+    "@types/express": "^4.17.2",
+    "@types/node": "^12.12.8",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.4",
+    "typescript": "^3.7.2"
+  }
+}
