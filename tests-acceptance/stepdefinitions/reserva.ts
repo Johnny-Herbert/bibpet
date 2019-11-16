@@ -12,7 +12,7 @@ defineSupportCode(function ({ Given, When, Then }) {
             expect(body).toEqual({success: "O petiano foi cadastrado com sucesso"});
         })
         await browser.get("http://localhost:4200/");
-        await expect(browser.getTitle()).to.eventually.equal('BibPET');
+        await expect(browser.getTitle()).to.eventually.equals('BibPET');
         await $("input[name='loginbox']").sendKeys(<string> login);
         await $("input[name='senhabox']").sendKeys(<string> senha);
         await $("a[name='loginbutton']").click();
@@ -70,7 +70,7 @@ defineSupportCode(function ({ Given, When, Then }) {
             expect(body).toEqual({success: "O petiano foi cadastrado com sucesso"});
         })
         await browser.get("http://localhost:4200/");
-        await expect(browser.getTitle()).to.eventually.equal('BibPET');
+        await expect(browser.getTitle()).to.eventually.equals('BibPET');
         await $("input[name='loginbox']").sendKeys(<string> login);
         await $("input[name='senhabox']").sendKeys(<string> senha);
         await $("a[name='loginbutton']").click();
@@ -145,7 +145,7 @@ defineSupportCode(function ({ Given, When, Then }) {
     });
 
     Given(/^Estou na página "(\d*)".$/, async (pagina) => {
-        await element(by.buttonText(pagina)).click();
+        await element(by.buttonText(pagina.toString())).click();
     });
 
     When(/^Eu solicito o cancelamento da reserva do livro de id "(\d*).$/,
@@ -175,7 +175,7 @@ defineSupportCode(function ({ Given, When, Then }) {
             expect(body).toEqual({success: "O petiano foi cadastrado com sucesso"});
         })
         await browser.get("http://localhost:4200/");
-        await expect(browser.getTitle()).to.eventually.equal('BibPET');
+        await expect(browser.getTitle()).to.eventually.equals('BibPET');
         await $("input[name='loginbox']").sendKeys(<string> login);
         await $("input[name='senhabox']").sendKeys(<string> senha);
         await $("a[name='loginbutton']").click();
