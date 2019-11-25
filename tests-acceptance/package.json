@@ -1,13 +1,13 @@
 {
   "name": "testes-acceptance",
-  "description": "Testes de aceitação do teaching assistant",
+  "description": "Testes de aceitação do bibpet",
   "scripts": {
     "tsc": "./node_modules/typescript/bin/tsc",
-    "test": "npm run tsc && protractor compiledCode/config/config.js",
+    "test": "npm run tsc && protractor compiledCode/config.js",
     "webdriver-update": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start"
   },
-  "author": "Paulo Borba",
+  "author": "bibpet",
   "devDependencies": {
     "@types/cucumber": "0.0.38",
     "@types/node": "^8.0.31",
