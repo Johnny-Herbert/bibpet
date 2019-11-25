@@ -1,7 +1,6 @@
 import express = require('express');
 import bodyParser = require("body-parser");
 
-
 var server = express();
 
 var allowCrossDomain = function(req: any, res: any, next: any) {
@@ -14,7 +13,7 @@ server.use(allowCrossDomain);
 server.use(bodyParser.json());
 
 server.get('/', function (req: express.Request, res: express.Response) {
-  res.send("Hello Word");
+  res.send("Hello World");
 })
 
 server.listen(3000, function () {

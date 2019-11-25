@@ -12,7 +12,7 @@ var allowCrossDomain = function (req, res, next) {
 server.use(allowCrossDomain);
 server.use(bodyParser.json());
 server.get('/', function (req, res) {
-    res.send("Hello Word");
+    res.send("Hello World");
 });
 server.listen(3000, function () {
     console.log('listening port 3000!');

@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "./node_modules/typescript/bin/tsc",
-    "start": "npm run tsc && node compiledCode/server.js"
+    "start": "npm run tsc && node ./database.js && node compiledCode/server.js"
   },
-  "author": "Jose Guilherme, Johnny Herbert, Samuel Oliveira, Vitor Souza e Cesar Silva",
+  "author": "Jose Guilherme, Johnny Herbert, Samuel Oliveira, Vitor Sousa e Cesar Silva",
   "license": "ISC",
   "dependencies": {
     "@types/body-parser": "^1.17.1",
