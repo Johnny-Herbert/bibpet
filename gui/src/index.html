@@ -5,6 +5,35 @@
   <title>Gui</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="database" href="../../server/database.db">
+  <script>
+    var sqlite3 = require('sqlite3').verbose();
+    // Pedindo o módulo
+
+    // Fazendo conexão com o banco
+    var db = new sqlite3.Database("../../server/database.db", sqlite3.OPEN_READONLY, (err) => {
+      if(err){
+        console.error(err.message);
+      }
+      console.log("Banco conectado com sucesso.");
+    });
+
+		var username = document.getElementById("usuarioLogin").value;
+		var password = document.getElementById("usuarioSenha").value;
+
+    let enunciadoBusca = ("SELECT * FROM usuario WHERE email = ? AND password = ?");
+    db.run(enunciadoBusca, [username, senha], function(err, rows) {
+      if(err){ 
+        console.log("Usuário ou senha incorretos");
+      } else {
+        let userLogado = row.email;
+        console.log("Fazendo login como", userLogado);
+        
+        if (userLogado == "admin") window.location = "administrador.html";
+        else window.location = "home.html";
+    });
+
+  </script>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
