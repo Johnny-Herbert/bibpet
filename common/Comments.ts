@@ -1,6 +1,11 @@
 import { Comment } from "./Comment";
 export class Comments{
-    CommentList: Array<Comment>;
+    commentList: Array<Comment>;
+    
+    Comments(){
+        this.commentList = new Array<Comment>();
+    }
+
     create(comment: Comment){};
     read(id:number){};
     update(comment: Comment){};

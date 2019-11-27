@@ -15,5 +15,6 @@ export class Book {
         this.isbn = isbn;
         this.edition = edition;
         this.type = type;
+        this.commentsLists = new Comments();
     }
 }
