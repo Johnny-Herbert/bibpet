@@ -1,10 +1,10 @@
 import { User } from "../common/User";
 
 export class Users {
-    users: User[];
+    users: Array<User>;
 
-    UserRepository(users: User[]){
-        this.users = users;
+    Users(){
+        this.users = new Array<User>();
     }
 
     create(user: User){}
