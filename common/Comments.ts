@@ -2,7 +2,7 @@ import { Comment } from "./Comment";
 export class Comments{
     commentList: Array<Comment>;
     
-    Comments(){
+    constructor(){
         this.commentList = new Array<Comment>();
     }
 

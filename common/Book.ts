@@ -9,7 +9,7 @@ export class Book {
     type: string;
     commentsLists: Comments;
 
-    Book(id: number, name: string, isbn: string,author: string, edition: string, type: string ) {
+    constructor(id: number, name: string, isbn: string,author: string, edition: string, type: string ) {
         this.id  = id;
         this.name = name;
         this.isbn = isbn;

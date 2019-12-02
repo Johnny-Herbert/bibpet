@@ -6,9 +6,9 @@ export class Reserve {
     book: Book;
     startDate: Date;
     endDate: Date;
-    active: Boolean;
+    active: boolean;
 
-    Reserve(user: User, book: Book, startDate: Date, endDate: Date, active: Boolean ){
+    constructor(user: User, book: Book, startDate: Date, endDate: Date, active: boolean ){
         this.user = user;
         this.book = book;
         this.startDate = startDate;
