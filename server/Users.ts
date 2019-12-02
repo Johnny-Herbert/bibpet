@@ -3,13 +3,23 @@ import { User } from "../common/User";
 export class Users {
     users: Array<User>;
 
-    Users(){
+    constructor(){
         this.users = new Array<User>();
     }
 
-    create(user: User){}
-    read(email: String){}
-    update(user: User){}
-    delete(email: String){}
-    login(email: String, password: String){}
+    create(user: User): User {
+        return new User("","","");
+    }
+    read(email: String): Array<User> {
+        return new Array<User>();
+    }
+    update(user: User): User {
+        return new User("","","");
+    }
+    delete(email: String): User {
+        return new User("","","");
+    }
+    login(email: String, password: String): User {
+        return new User("","","");
+    }
 }
