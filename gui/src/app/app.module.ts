@@ -16,7 +16,21 @@ import { AdminComponent } from './admin/admin.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot([
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
+        path: 'admin',
+        component: AdminComponent
+      },
+      {
+        path: '',
+        component: HomeComponent
+      }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
