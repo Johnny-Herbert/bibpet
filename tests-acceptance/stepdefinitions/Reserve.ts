@@ -9,7 +9,8 @@ let pAND = ((p,q,r,s) => p.then(a => q.then(b => r.then(c => s.then(d => a && b 
 let sameName = ((elem, name) => elem.element(by.name('reserve-book-name-list')).getText().then(text => text === name));
 let sameStartDate = ((elem, startDate) => elem.element(by.name('reserve-date-start-list')).getText().then(text => text === startDate));
 let sameEndDate = ((elem, endDate) => elem.element(by.name('reserve-date-end-list')).getText().then(text => text === endDate));
-let activeCondition = ((elem) => elem.element(by.name('reserve-condition-list')).getText().then(text => text === 'active'))
+let activeCondition = ((elem) => elem.element(by.name('reserve-condition-list')).getText().then(text => text === 'active'));
+let confirmMesage = (() => element(by.name('server-response-label')).getText().then(text => text.includes('sucesso')));
 //Constantes
 const login = async (email : string, password : string) => {
     await expect(browser.getTitle()).to.eventually.equal('Página Login');
@@ -62,30 +63,30 @@ defineSupportCode(function ({ Given, When, Then }) {
         await element(by.name("collection-button")).click();
         await expect(browser.getTitle()).to.eventually.equal(pageName);
     });
-    Given(/^Não há nenhuma reserva no sistema para o livro “([^\"]*)” de isbn “([^\"]*)” no intervalo de “([^\"]*)” até “([^\"]*)”.$/,
-    async(name,isbn,startDate,endDate) => {
+    Given(/^Não há nenhuma reserva no sistema para o livro “([^\"]*)” no intervalo de “([^\"]*)” até “([^\"]*)”.$/,
+    async(name,startDate,endDate) => {
         //
     });
     When(/^Eu solicito a reserva do livro “([^\"]*)” no intervalo de “([^\"]*)” até “([^\"]*)”.$/,
     async(name: string,startDate: string,endDate: string) => {
         await $("input[name='book-name-box']").sendKeys(<string> name);
-        await element(by.name("book-name-box")).click();
+        await element(by.name("search-book-button")).click();
         var books : ElementArrayFinder = element.all(by.name('book-list'));
         await books.filter(elem => sameName(elem, name).then
-        (elems => expect(element(by.name('reserve-book-button')).click())));
+            (elems => expect(element(by.name('reserve-book-button')).click())));
         await reserveBook(startDate,endDate);
     });
     Then(/^Eu recebo uma mensagem de confirmação de reserva.$/,async() => {
-        //
+        await confirmMesage();
     });
     Then(/^Há uma  reserva no sistema para o livro “([^\"]*)” no intervalo de “([^\"]*)” até “([^\"]*)” em nome de “([^\"]*)”.$/,
         async(bookName: string,startDate: string,endDate: string,userName: string) => {
             await element(by.name('button-finish-reserve-register')).click();
             await expect(browser.getTitle()).to.eventually.equal('Página Reservas');
-            var reserves: ElementArrayFinder = element.all(by.name(''))
+            var reserves: ElementArrayFinder = element.all(by.name('reserve-list'))
             await reserves.filter(elem => pAND(sameName(elem, name), sameStartDate(elem, startDate), sameEndDate(elem, endDate), activeCondition(elem))).then
-        (elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
-        });
+                (elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
+    });
 });
 defineSupportCode(function ({ Given, When, Then }) {
     Given(/^O petiano "([^\"]*)", com a senha "([^\"]*)" e email "([^\"]*)" esta logado no sistema.$/,
@@ -102,12 +103,74 @@ defineSupportCode(function ({ Given, When, Then }) {
         async(bookName: string,startDate: string,endDate: string,userName: string) => {
             await element(by.name('button-finish-reserve-register')).click();
             await expect(browser.getTitle()).to.eventually.equal('Página Reservas');
-            var reserves: ElementArrayFinder = element.all(by.name(''))
-            await reserves.filter(elem => pAND(sameName(elem, name), sameStartDate(elem, startDate), sameEndDate(elem, endDate), activeCondition(elem))).then
-        (elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
+            var reserves: ElementArrayFinder = element.all(by.name('reserve-list'))
+            await reserves.filter(elem => pAND(sameName(elem, bookName), sameStartDate(elem, startDate), sameEndDate(elem, endDate), activeCondition(elem))).then
+                (elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
     });
     Given(/^Estou na página “([^\"]*)”.$/, async(pageName) => {
         await element(by.name("collection-button")).click();
         await expect(browser.getTitle()).to.eventually.equal(pageName);
+    });
+    When(/^Eu solicito o cancelamento da reserva do livro “([^\"]*)” no intervalo de “([^\"]*)” até “([^\"]*)”.$/,
+        async(name,startDate,endDate) =>{
+            var reserves : ElementArrayFinder = element.all(by.name('reserve-list'));
+            await reserves.filter(elem => pAND(sameName(elem, name), sameStartDate(elem, startDate), sameEndDate(elem, endDate), activeCondition(elem)).then
+                (elems => expect(element(by.name('cancel-button')).click())));
+    });
+    Then(/^Eu recebo uma mensagem confirmando o cancelamento.$/, async() =>{
+        await confirmMesage();
+    });
+    Then(/^Não há nenhuma reserva no sistema para o livro “([^\"]*)” no intervalo de “([^\"]*)” até “([^\"]*)”.$/,
+    async(name,startDate,endDate) => {
+        //
+    });
+});
+defineSupportCode(function ({ Given, When, Then }) {
+    Given(/^O petiano "([^\"]*)", com a senha "([^\"]*)" e email "([^\"]*)" esta logado no sistema.$/,
+    async(name: string,password: string,email: string) => {  
+        await browser.get("http://localhost:4200/");
+        await login("pet@cin.ufpe.br","123");
+        await element(by.name("user-register-button")).click();
+        //Qual a pagina inicial?
+        await newUser(<string>name, <string>password, <string>email);
+        await element(by.name("logout-button")).click();
+        await login(email,password);
+    });
+    Given(/^Há uma reserva no sistema para o livro “([^\"]*)” no intervalo de “([^\"]*)” até “([^\"]*)” em nome de “([^\"]*)”.$/,
+        async(bookName: string,startDate: string,endDate: string,userName: string) => {
+            await element(by.name('button-finish-reserve-register')).click();
+            await expect(browser.getTitle()).to.eventually.equal('Página Reservas');
+            var reserves: ElementArrayFinder = element.all(by.name('reserve-list'))
+            await reserves.filter(elem => pAND(sameName(elem, bookName), sameStartDate(elem, startDate), sameEndDate(elem, endDate), activeCondition(elem))).then
+                (elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
+    });
+    Given(/^Não há nenhuma reserva no sistema para o livro “([^\"]*)” no intervalo de “([^\"]*)” até “([^\"]*)”.$/,
+    async(name,startDate,endDate) => {
+        //
+    });
+    Given(/^Estou na página “([^\"]*)”.$/, async(pageName) => {
+        await element(by.name("collection-button")).click();
+        await expect(browser.getTitle()).to.eventually.equal(pageName);
+    });
+    When(/^Eu solicito a extenção da reserva do livro “([^\"]*)” no intervalo de “([^\"]*)” até “([^\"]*)”.$/,
+        async(name,startDate,endDate) =>{
+            var reserves : ElementArrayFinder = element.all(by.name('reserve-list'));
+            await reserves.filter(elem => pAND(sameName(elem, name), sameStartDate(elem, startDate), sameEndDate(elem, endDate), activeCondition(elem)).then
+                (elems => expect(element(by.name('extend-button')).click())));
+            await expect(browser.getTitle()).to.eventually.equal('Página Extender Reserva');
+            await $("input[name='reserve-extension-start-date']").sendKeys(<string> startDate);
+            await $("input[name='reserve-extension-end-date']").sendKeys(<string> endDate);
+            await element(by.name('button-finish-reserve-extension')).click();
+    });
+    Then(/^Eu recebo uma mensagem confirmando a extensão.$/, async() =>{
+        await confirmMesage();
+    });
+    Then(/^Há uma reserva no sistema para o livro “([^\"]*)” no intervalo de “([^\"]*)” até “([^\"]*)” em nome de “([^\"]*)”.$/,
+        async(bookName: string,startDate: string,endDate: string,userName: string) => {
+            await element(by.name('button-finish-reserve-register')).click();
+            await expect(browser.getTitle()).to.eventually.equal('Página Reservas');
+            var reserves: ElementArrayFinder = element.all(by.name('reserve-list'))
+            await reserves.filter(elem => pAND(sameName(elem, bookName), sameStartDate(elem, startDate), sameEndDate(elem, endDate), activeCondition(elem))).then
+                (elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
     });
 });

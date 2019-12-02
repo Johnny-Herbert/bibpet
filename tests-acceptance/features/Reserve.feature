@@ -20,6 +20,6 @@ Scenario: Estender reserva.
 		AND: Há uma reserva no sistema para o livro “Cracking the Coding Interview” no intervalo de “25/08/2019” até “01/09/2019” em nome de “César Silva”.
 		AND: Não há nenhuma reserva no sistema para o livro “Cracking the Coding Interview” no intervalo de “25/08/2019” até “05/09/2019”.
 		AND: Estou na página “Página Reservas”.
-		WHEN: WHEN: Eu solicito a extenção da reserva do livro “Cracking the Coding Interview” no intervalo de “25/08/2019” até “05/09/2019”.
+		WHEN: Eu solicito a extenção da reserva do livro “Cracking the Coding Interview” no intervalo de “25/08/2019” até “05/09/2019”.
 		THEN: Eu recebo uma mensagem confirmando a extensão.
 		AND:  Há uma  reserva no sistema para o livro “Cracking the Coding Interview” no intervalo de “25/08/2019” até “01/09/2019” em nome de “César Silva”.
