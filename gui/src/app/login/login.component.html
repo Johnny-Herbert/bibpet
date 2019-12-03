@@ -1,5 +1,6 @@
-<form (submit)="loginUsuario($event)">
-    <input type="text" placeholder="Login">
-    <input type="password" placeholder="Senha">
-    <input type="submit" value="Entrar">
-</form>
+<body>
+    <td><label>Insira seus dados</label></td><br>
+    <td><input type="email"    #username (keyup.enter)="loginUsuario(username.value, username.value)" placeholder="Login"></td><br>
+    <td><input type="password" #password (keyup.enter)="loginUsuario(password.value, password.value)" placeholder="Senha"></td><br>
+    <td><button (click)="loginUsuario(username.value, password.value)">Entrar</button></td>
+</body>
