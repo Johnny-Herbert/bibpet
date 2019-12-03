@@ -14,7 +14,7 @@ let chai = require('chai').use(require('chai-as-promised'));
 let expect = chai.expect;
 cucumber_1.defineSupportCode(function ({ Given, When, Then }) {
     Given(/^Given I am at some Login page not logged$/, () => __awaiter(this, void 0, void 0, function* () {
-        yield protractor_1.browser.get("http://localhost:4200/");
+        yield protractor_1.browser.get("http://localhost:4200/login");
         yield expect(protractor_1.browser.getTitle()).to.eventually.equal('Login BibPET');
     }));
     Given(/^Given I am at some "([^\"]*)" page not logged$/, (bookTitle) => __awaiter(this, void 0, void 0, function* () {
@@ -25,7 +25,7 @@ cucumber_1.defineSupportCode(function ({ Given, When, Then }) {
     When(/^When I check “Peguei o livro” option$/, () => __awaiter(this, void 0, void 0, function* () {
         yield protractor_1.element(protractor_1.by.buttonText('Peguei o livro')).click();
     }));
-    When(/^When I check “Devolveer o livro” option$/, () => __awaiter(this, void 0, void 0, function* () {
+    When(/^When I check “Devolver o livro” option$/, () => __awaiter(this, void 0, void 0, function* () {
         yield protractor_1.element(protractor_1.by.buttonText('Devolver o livro')).click();
     }));
     Then(/^The “Book status” is now “emprestado” by "([^\"]*)"$/, (bookStatus, bookActualOwner) => __awaiter(this, void 0, void 0, function* () {
@@ -39,7 +39,7 @@ cucumber_1.defineSupportCode(function ({ Given, When, Then }) {
         yield expect(protractor_1.browser.getTitle()).to.eventually.equal('System Management');
     }));
     Then(/^I am at Home page$/, () => __awaiter(this, void 0, void 0, function* () {
-        yield expect(protractor_1.browser.getTitle()).to.eventually.equal('Home');
+        yield expect(protractor_1.browser.getTitle()).to.eventually.equal('Homepage');
     }));
     When(/^When I fill login as "([^\"]*)" and password "([^\"]*)"$/, (userLogin, userPassword) => __awaiter(this, void 0, void 0, function* () {
         yield protractor_1.$("input[name='userLogin']").sendKeys(userLogin);

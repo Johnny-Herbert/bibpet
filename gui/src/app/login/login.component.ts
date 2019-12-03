@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-login',
@@ -9,9 +10,10 @@ import { CookieService } from 'ngx-cookie-service';
 
 export class LoginComponent implements OnInit {
   private cookieValue: string;
-  constructor(private element: ElementRef, private cookieService: CookieService) { }
+  constructor(private element: ElementRef, private cookieService: CookieService, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle("Login BibPET");
   }
 
   loginUsuario(username: string, password: string){
