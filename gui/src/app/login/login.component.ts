@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
       this.cookieService.set('user', username);
       let texto = "Logado como usuário: " + username;
       alert(texto);
+      window.location = 'http://localhost:4200/';
     } else {
       alert("Login incorreto");
     }
