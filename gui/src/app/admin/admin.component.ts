@@ -11,6 +11,14 @@ export class AdminComponent implements OnInit {
   private cookieValue: string;
   constructor(private cookieService: CookieService, private titleService: Title) { }
 
+  sair(){
+    this.cookieService.deleteAll('/', '');
+    this.cookieService.deleteAll('/admin', '');
+    this.cookieService.deleteAll('/login', '');
+    window.open('http://localhost:4200', '_self');
+    console.log('Saindo!');
+  }
+
   ngOnInit(): void {
     this.titleService.setTitle("System Management");
     if(! (this.cookieService.get('user') == 'admin') ){
