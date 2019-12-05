@@ -1,29 +1,29 @@
 {
-    "0": {
-      "id": "021",
-      "name": "Craking The Code",
-      "isbn": "2183109283",
-      "author": "CTC Author",
-      "edition": "2",
-      "type": "Copy",
-      "commentsLists": "Muito bom para maratona"
-    },
-    "1": {
-      "id": "013",
-      "name": "CálculoI",
-      "isbn": "4141234",
-      "author": "James Stewart",
-      "edition": "6",
-      "type": "Original",
-      "commentsLists": "Muito bom para área 2"
-    },
-    "2": {
-      "id": "030",
-      "name": "Cracking The Code Interview",
-      "isbn": "86585634",
-      "author": "CTC Author",
-      "edition": "1",
-      "type": "First 2 chapters",
-      "commentsLists": "Muito bom para entrevistas"
-    }
+  "0": {
+    "id": "021",
+    "name": "Cracking The Code",
+    "isbn": "2183109283",
+    "author": "CTC Author",
+    "edition": "2",
+    "type": "Copy",
+    "commentsLists": "Muito bom para maratona"
+  },
+  "1": {
+    "id": "013",
+    "name": "CálculoI",
+    "isbn": "4141234",
+    "author": "James Stewart",
+    "edition": "6",
+    "type": "Original",
+    "commentsLists": "Muito bom para área 2"
+  },
+  "2": {
+    "id": "030",
+    "name": "Cracking The Code Interview",
+    "isbn": "86585634",
+    "author": "CTC Author",
+    "edition": "1",
+    "type": "First 2 chapters",
+    "commentsLists": "Muito bom para entrevistas"
   }
+}

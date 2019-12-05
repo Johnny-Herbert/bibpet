@@ -37,6 +37,10 @@ import { BookComponent } from './book/book.component';
       {
         path: '',
         component: HomeComponent
+      },
+      {
+        path: 'book',
+        component: BookComponent
       }
     ])
   ],
