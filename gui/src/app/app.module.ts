@@ -9,13 +9,17 @@ import { AdminComponent } from './admin/admin.component';
 import { RouterModule } from '@angular/router'
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { BooksComponent } from './books/books.component';
+import { BookComponent } from './book/book.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    AdminComponent
+    AdminComponent,
+    BooksComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
