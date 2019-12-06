@@ -1,1 +1,9 @@
-<p>books works!</p>
+<body>
+        <h2>Temos os seguintes livros</h2>
+        <li *ngFor="let drop of drops" (click)="onSelect(drop)">
+           <a routerLink="/book">
+                Livro: {{ drop.name }}, Edição {{drop.edition}}
+            </a>
+        </li>
+        <br><button (click)="sair()">Sair</button> 
+</body>

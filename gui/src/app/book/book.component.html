@@ -1,5 +1,12 @@
 <body>
-    <li>
-        {{output.name}}  {{output.isbn}} {{output.type}} {{output.commentsLists}} 
-    </li>
+        <h2>Detalhes do Livro</h2>
+        <li *ngFor="let drop of drops">
+            Livro: {{drop.name}} <br>
+            Edição {{drop.edition}} <br>
+            ISBN: {{drop.isbn}} <br>
+            Autor: {{drop.author}} <br>
+            Tipo: {{drop.type}} <br>
+            Comentários: {{drop.commentsLists}} <br><br>
+        </li>
+        <br><button (click)="sair()">Sair</button> 
 </body>

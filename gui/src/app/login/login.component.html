@@ -2,7 +2,7 @@
 <body>
     <img src="../../assets/petCIn-logo.png" width="200px" height="200px">
     <td><label>Insira seus dados</label></td><br>
-    <td><input name="userLogin"    type="email"    #username (keyup.enter)="loginUsuario(username.value, username.value)" placeholder="Login"></td><br>
-    <td><input name="userPassword" type="password" #password (keyup.enter)="loginUsuario(password.value, password.value)" placeholder="Senha"></td><br>
+    <td><input name="userLogin"    type="email"    #username (keyup.enter)="loginUsuario(username.value, password.value)" placeholder="Login"></td><br>
+    <td><input name="userPassword" type="password" #password (keyup.enter)="loginUsuario(username.value, password.value)" placeholder="Senha"></td><br>
     <td><button (click)="loginUsuario(username.value, password.value)">Entrar</button></td>
 </body>
