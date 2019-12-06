@@ -23,16 +23,15 @@ export class BookComponent implements OnInit {
     this.cookieService.deleteAll('/admin', '');
     this.cookieService.deleteAll('/login', '');
     window.open('http://localhost:4200', '_self');
-    //console.log('Saindo!');
   }
   
   replaceChars(cookieBook){
-    let name_ed = cookieBook.split('ed:')
+    let name_ed = cookieBook.split(' ed: ')
     return name_ed;
   }
 
   ngOnInit() { 
-    let bookPage = this.cookieService.get('bookSelected');
+    var bookPage = this.cookieService.get('bookSelected');
     bookPage = this.replaceChars(bookPage);
 
     this.titleService.setTitle(bookPage[0]);
@@ -52,7 +51,7 @@ export class BookComponent implements OnInit {
               commentsLists: bookData[f].commentsLists
             } 
           });
-        while(this.drops.length != 1){
+        while(this.drops.length > 1){
           this.drops.pop();
         }
       }
