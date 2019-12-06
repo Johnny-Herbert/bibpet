@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     } else if (petianos.includes(username)){
       this.cookieService.set('user', username);
       let texto = "Logado como usuário: " + username;
-      alert(texto);
+      //alert(texto);
       window.open('http://localhost:4200/books/', '_self');
     } else {
       alert("Login incorreto");

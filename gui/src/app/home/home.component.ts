@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
       this.titleService.setTitle(user);
       console.log(this.cookieService.get('user'));
       let texto = "Bem vindo de volta " + this.cookieService.get('user');
-      alert(texto);
+      //alert(texto);
     }
   }
 
