@@ -15,6 +15,10 @@ export class Reserve {
         this.endDate = endDate;
         this.active = active;
     }
-    extend_reserve(date: Date){}
-    disable_reserve(){};
+    extend_reserve(date: Date){
+        this.endDate = date;
+    }
+    disable_reserve(){
+        this.active = false;
+    };
 }

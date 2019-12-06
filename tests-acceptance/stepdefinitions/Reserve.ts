@@ -1,5 +1,5 @@
-import { Book } from "./common/Book";
-import { User } from "./common/User";
+//import { Book } from "./common/Book";
+//import { User } from "./common/User";
 import { defineSupportCode } from 'cucumber';
 import { browser, $, element, ElementArrayFinder, by } from 'protractor';
 let chai = require('chai').use(require('chai-as-promised'));
