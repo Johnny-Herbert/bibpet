@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   constructor(private element: ElementRef, private cookieService: CookieService, private titleService: Title) { }
 
   ngOnInit() {
-    this.titleService.setTitle("Login BibPET");
+    this.titleService.setTitle("Login");
   }
 
   loginUsuario(username: string, password: string){
