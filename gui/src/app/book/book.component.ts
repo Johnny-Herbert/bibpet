@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from "@angular/platform-browser";
 import { CookieService } from 'ngx-cookie-service';
-import * as livrosS from '../../livros.json'
+import * as livrosS from './livros.json';
+
+@Component({
+  selector: 'app-book',
+  templateUrl: './book.component.html',
+  styleUrls: ['./book.component.css']
+})
 
 export class BookComponent implements OnInit {
   drops: any;
@@ -9,9 +15,10 @@ export class BookComponent implements OnInit {
   private cookieValue: string;
 
   constructor(private cookieService: CookieService, private titleService: Title) {
+
   }
 
-    sair(){
+  sair(){
     this.cookieService.deleteAll('/', '');
     this.cookieService.deleteAll('/admin', '');
     this.cookieService.deleteAll('/login', '');
@@ -45,7 +52,6 @@ export class BookComponent implements OnInit {
               commentsLists: bookData[f].commentsLists
             } 
           });
-        //this.drops = this.drops[0];
         while(this.drops.length != 1){
           this.drops.pop();
         }
