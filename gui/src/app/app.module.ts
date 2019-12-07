@@ -25,6 +25,22 @@ import { BooksComponent } from './books/books.component';
       {
         path: '',
         component: HomeComponent
+      },
+      {
+        path: 'book',
+        component: BookComponent
+      }
+      {
+        path: 'books',
+        component: BooksComponent
+      }
+      {
+        path: 'admin',
+        component: AdminComponent
+      },
+      {
+        path: 'login',
+        component: LoginComponent
       }
     ])
   ],
