@@ -7,6 +7,7 @@ import { HomeComponent } from './home.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { BookComponent } from './book/book.component';
+import { BooksComponent } from './books/books.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { BookComponent } from './book/book.component';
     HomeComponent,
     LoginComponent,
     AdminComponent,
-    BookComponent
+    BookComponent,
+    BooksComponent
   ],
   imports: [
     BrowserModule,
