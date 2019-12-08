@@ -94,6 +94,10 @@ defineSupportCode(function ({ Given, When, Then }) {
         await searchBook(<string>name, "", <string>type);
     });
 
+    When(/^eu pesquiso pelo nome "([^\"]*)" e pelo autor "([^\"]*)"$/, async (name, author) => {
+        await searchBook(<string>name, <string>author, "");
+    });
+
     Then(/^eu vejo na lista de livros o livro de nome "([^\"]*)" de autor "([^\"]*)" e de tópico "([^\"]*)"$/, async (name, author, type) => {
         var livros : ElementArrayFinder = element.all(by.name('livro-list'));
         await livros.filter(elem => pAND(sameName(elem, name), sameAuthor(elem, author), sameType(elem, type))).then
