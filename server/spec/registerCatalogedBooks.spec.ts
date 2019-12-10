@@ -52,4 +52,11 @@ describe("O cadastro de livros", () => {
       expect(catalogedBook.book.type).toBe("IP");
 
     });
+
+    it("excluir livros corretamente", () => {
+      var catalogedBook = bookRegister("Introdução a algoritmos", "isbn", "Samuel Oliveira", "3", "Algoritimos");
+      register.delete(catalogedBook.book.id);
+      expect(register.catalogedBookList.length).toBe(0);
+    });
+
 });
