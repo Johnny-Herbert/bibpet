@@ -7,10 +7,8 @@ export class Reserves {
         if(reserveToDo.book.id === reserveDone.book.id && 
             reserveDone.active === true && this.verifyConflict(reserveToDo,reserveDone)&&
             this.verifyConflict(reserveDone,reserveToDo)){
-                console.log("Foi True no Validate");
                 return true;
         }else{
-            console.log("Foi False no Validate");
             return false;
         }
     }
@@ -19,25 +17,19 @@ export class Reserves {
                 this.dateGreaterThan(reserveDone.endDate,reserveToDo.startDate)) ||
            (this.dateGreaterThan(reserveToDo.endDate,reserveDone.startDate) && 
                 this.dateGreaterThan(reserveDone.endDate,reserveToDo.endDate))){
-                    console.log("Foi True no Verify");
                     return true;
         }else{
-            console.log("Foi False no Veriry");
             return false;
         }
     }
     private dateGreaterThan(dateGrater: String, dateThan: String):boolean{
-        console.log(dateGrater);
-        console.log(dateThan);
         var arrayDateGrater = dateGrater.split('/');
         var arrayDateThan = dateThan.split('/');
         if((arrayDateGrater[2] > arrayDateThan[2]) ||
            (arrayDateGrater[1] > arrayDateThan[1]) ||
            (arrayDateGrater[0] > arrayDateThan[0])){
-            console.log("Data True");
             return true;
         }else{
-            console.log("Data False");
             return false;
         }
     }
@@ -81,7 +73,7 @@ export class Reserves {
     delete(reservetoDelete: Reserve): String{
         var toDeleteIndex = this.reserves.findIndex(reserve => this.sameReserve(reservetoDelete,reserve));
         if(toDeleteIndex !== -1){
-            this.reserves.splice(toDeleteIndex,1);
+            this.reserves[toDeleteIndex].active = false;
             return "Success";
         }else{
             return "Failure";
@@ -91,12 +83,14 @@ export class Reserves {
     logByDate(startDate: Date,endDate: Date){}
     logByEmail(email: String){}
     logByBook(id: number){}
-    actives(id_user: String):Array<Reserve>{
-        var activeReserves = this.reserves.filter(reserve => (reserve.user.email === id_user && reserve.active));
+    actives(email: String):Array<Reserve>{
+        email = email.substring(10,email.length-2);
+        var activeReserves = this.reserves.filter(reserve => (reserve.active && reserve.user.email == email));
         return activeReserves;
     }
-    inactives(id_user: String):Array<Reserve>{
-        var inactiveReserves = this.reserves.filter(reserve => (reserve.user.email === id_user && !reserve.active));
+    inactives(email: String):Array<Reserve>{
+        email = email.substring(10,email.length-2);
+        var inactiveReserves = this.reserves.filter(reserve => (!reserve.active && reserve.user.email == email));
         return inactiveReserves;
     }
 
