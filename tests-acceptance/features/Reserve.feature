@@ -1,3 +1,7 @@
+Feature: Reservas de Livros
+		I Whant: Criar e gerenciar minhas reservas.
+		So That: Eu consigo solicitar a reserva de livros disponiveis e cancelar/estender essa reserva.
+
 Scenario: Reserva para data disponível (Sucesso).
 		Given: O petiano "César Silva", com a senha "Pão_Com_Ovo" e email "accs2@cin.ufpe.br" esta logado no sistema.
 		AND: O livro “Cracking the Coding Interview” esta catalogado, seu tema e “Algoritmos”, seu isbn e "123a4", seu autor e "Marcelo", sua edicao e "Segunda".
