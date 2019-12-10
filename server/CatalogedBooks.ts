@@ -53,7 +53,14 @@ export class CatalogedBooks{
         return result;
     };
     delete(id:number): CatalogedBook {
-        return new CatalogedBook(new User("", "", ""), new Book(1,"","","","",""));
+        var result = null;
+        for(var i = 0; i < this.catalogedBookList.length; i++) {
+            if(this.catalogedBookList[i].book.id === id) {
+                result = this.catalogedBookList[i];
+                this.catalogedBookList.splice(i, 1);
+            }
+        }
+        return result;
     };
     search(name:string, author:string, type:string): Array<CatalogedBook> {
         return new Array<CatalogedBook>();
