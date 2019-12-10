@@ -10,7 +10,20 @@ export class CatalogedBooks{
     }
     
     create(catalogedBook: CatalogedBook): CatalogedBook {
-        return new CatalogedBook(new User("", "", ""), new Book(1,"","","","",""));
+        var result = null;
+        if(catalogedBook.book.name !== "" && catalogedBook.book.isbn !== "") {
+            var id : number;
+            if(this.catalogedBookList.length === 0) {
+                id = 0;
+            }
+            else {
+                id = this.catalogedBookList[this.catalogedBookList.length-1].book.id;
+            }
+            catalogedBook.book.id = id;
+            result = catalogedBook;
+            this.catalogedBookList.push(catalogedBook);
+        }
+        return result;
     };
     read(id:number): Array<CatalogedBook> {
         return new Array<CatalogedBook>();
