@@ -17,6 +17,12 @@ server.get('/', function (req: express.Request, res: express.Response) {
   res.send("Hello Word");
 })
 
-server.listen(3000, function () {
+var openServer = server.listen(3000, function () {
   console.log('listening port 3000!')
 })
+
+function closeServer(): void {
+  openServer.close();
+}
+
+export { openServer, closeServer }
