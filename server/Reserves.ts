@@ -1,7 +1,7 @@
 import { Reserve } from "../common/Reserve";
 
 export class Reserves {
-    reserves: Array<Reserve>;;
+    reserves: Array<Reserve>;
 
     private validateReserve(reserveToDo: Reserve,reserveDone: Reserve):boolean{
         if(reserveToDo.book.id === reserveDone.book.id && 
@@ -42,8 +42,8 @@ export class Reserves {
         }
     }
     read(id: number){}
-    update(reserveToUp: Reserve,newReserve: Reserve):Object{
-        var toUpIndex = this.reserves.findIndex(reserve => reserve.equals(reserveToUp));
+    update(newReserve: Reserve):Object{
+        var toUpIndex = this.reserves.findIndex(reserve => reserve.equals(newReserve));
         var newReserveConflicts = this.reserves.filter(reserve => this.validateReserve(newReserve,reserve));
         var answer;
         if(toUpIndex !== -1 && newReserveConflicts.length <= 1){
