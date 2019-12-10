@@ -17,7 +17,7 @@ export class CatalogedBooks{
                 id = 0;
             }
             else {
-                id = this.catalogedBookList[this.catalogedBookList.length-1].book.id;
+                id = this.catalogedBookList[this.catalogedBookList.length-1].book.id + 1;
             }
             catalogedBook.book.id = id;
             result = catalogedBook;
