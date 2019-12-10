@@ -44,8 +44,14 @@ export class Reserves {
         }
     }
     read(id: number){}
-    update(reserveToUp: Reserve,newReserv: Reserve){
-        
+    update(reserveToUp: Reserve,newReserve: Reserve){
+        var toUpIndex = this.reserves.findIndex(reserve => reserve.equals(reserveToUp));
+        if(toUpIndex !== -1){
+            this.reserves[toUpIndex] = newReserve;
+            return "Sucess";
+        }else{
+            return "Failure";
+        }
     }
     delete(reservetoDelete: Reserve){
         var toDeleteIndex = this.reserves.findIndex(reserve => reserve.equals(reservetoDelete));
