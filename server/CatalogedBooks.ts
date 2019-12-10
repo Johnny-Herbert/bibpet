@@ -41,7 +41,16 @@ export class CatalogedBooks{
         return this.catalogedBookList;
     };
     update(catalogedBook: CatalogedBook): CatalogedBook {
-        return new CatalogedBook(new User("", "", ""), new Book(1,"","","","",""));
+        var result = null;
+        for(var i = 0; i < this.catalogedBookList.length; i++) {
+            if(this.catalogedBookList[i].book.id === catalogedBook.book.id) {
+                this.catalogedBookList[i] = catalogedBook;
+                result = catalogedBook;
+                break;
+            }
+        }
+
+        return result;
     };
     delete(id:number): CatalogedBook {
         return new CatalogedBook(new User("", "", ""), new Book(1,"","","","",""));
