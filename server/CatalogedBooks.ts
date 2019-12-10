@@ -25,7 +25,18 @@ export class CatalogedBooks{
         }
         return result;
     };
-    read(id:number): Array<CatalogedBook> {
+
+    readOnly(id:number): CatalogedBook {
+        var result = null;
+        for(var i = 0; i < this.catalogedBookList.length; i++) {
+            if(this.catalogedBookList[i].book.id === id) {
+                result = this.catalogedBookList[i];
+            }
+        }
+        return result;
+    }
+
+    read(): Array<CatalogedBook> {
         return new Array<CatalogedBook>();
     };
     update(catalogedBook: CatalogedBook): CatalogedBook {
