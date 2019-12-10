@@ -30,8 +30,8 @@ export class Reserves {
             return false;
         }
     }
-    create(reserveToDo: Reserve):Array<Object>{
-        var reserveConflicts = this.reserves.filter(reserve => this.verifyConflict(reserveToDo,reserve));
+    create(reserveToDo: Reserve):Object{
+        var reserveConflicts = this.reserves.filter(reserve => this.validateReserve(reserveToDo,reserve));
         var answer;
         if(reserveConflicts.length === 0){
             answer = [reserveToDo,"Success"];
@@ -42,16 +42,20 @@ export class Reserves {
         }
     }
     read(id: number){}
-    update(reserveToUp: Reserve,newReserve: Reserve){
+    update(reserveToUp: Reserve,newReserve: Reserve):Object{
         var toUpIndex = this.reserves.findIndex(reserve => reserve.equals(reserveToUp));
-        if(toUpIndex !== -1 && this.validateReserve(newReserve)){
+        var newReserveConflicts = this.reserves.filter(reserve => this.validateReserve(newReserve,reserve));
+        var answer;
+        if(toUpIndex !== -1 && newReserveConflicts.length <= 1){
             this.reserves[toUpIndex] = newReserve;
-            return "Sucess";
+            answer = [newReserve,"Success"];
+            return answer;
         }else{
-            return "Failure";
+            answer = [newReserveConflicts,"Failure"];
+            return answer;
         }
     }
-    delete(reservetoDelete: Reserve){
+    delete(reservetoDelete: Reserve): String{
         var toDeleteIndex = this.reserves.findIndex(reserve => reserve.equals(reservetoDelete));
         if(toDeleteIndex !== -1){
             this.reserves.splice(toDeleteIndex,1);
