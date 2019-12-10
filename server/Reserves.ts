@@ -3,14 +3,12 @@ import { Reserve } from "../common/Reserve";
 export class Reserves {
     reserves: Array<Reserve>;;
 
-    private validateReserve(reserve: Reserve):boolean{
-        for(var i = 0; i < this.reserves.length; i++){
-            if(reserve.book.id === this.reserves[i].book.id && 
-                reserve.active === true && this.verifyConflict(reserve,this.reserves[i])){
-                return true;
-            }else{
-                return false;
-            }
+    private validateReserve(reserveToDo: Reserve,reserveDone: Reserve):boolean{
+        if(reserveToDo.book.id === reserveDone.book.id && 
+            reserveDone.active === true && this.verifyConflict(reserveToDo,reserveDone)){
+            return true;
+        }else{
+            return false;
         }
     }
     private verifyConflict(reserveToDo: Reserve, reserveDone: Reserve):boolean{
@@ -32,11 +30,11 @@ export class Reserves {
             return false;
         }
     }
-    create(reserve: Reserve):Array<Object>{
-        var reserveConflicts = this.reserves.filter(reserve => this.validateReserve(reserve));
+    create(reserveToDo: Reserve):Array<Object>{
+        var reserveConflicts = this.reserves.filter(reserve => this.verifyConflict(reserveToDo,reserve));
         var answer;
         if(reserveConflicts.length === 0){
-            answer = [reserve,"Success"];
+            answer = [reserveToDo,"Success"];
             return answer;
         }else{
             answer = [reserveConflicts,"Failure"]
@@ -46,7 +44,7 @@ export class Reserves {
     read(id: number){}
     update(reserveToUp: Reserve,newReserve: Reserve){
         var toUpIndex = this.reserves.findIndex(reserve => reserve.equals(reserveToUp));
-        if(toUpIndex !== -1){
+        if(toUpIndex !== -1 && this.validateReserve(newReserve)){
             this.reserves[toUpIndex] = newReserve;
             return "Sucess";
         }else{
