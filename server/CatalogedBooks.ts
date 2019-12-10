@@ -31,13 +31,14 @@ export class CatalogedBooks{
         for(var i = 0; i < this.catalogedBookList.length; i++) {
             if(this.catalogedBookList[i].book.id === id) {
                 result = this.catalogedBookList[i];
+                break;
             }
         }
         return result;
     }
 
     read(): Array<CatalogedBook> {
-        return new Array<CatalogedBook>();
+        return this.catalogedBookList;
     };
     update(catalogedBook: CatalogedBook): CatalogedBook {
         return new CatalogedBook(new User("", "", ""), new Book(1,"","","","",""));
