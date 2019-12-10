@@ -4,11 +4,11 @@ import { Book } from '../common/Book';
 
 export class CatalogedBooks{
     catalogedBookList: Array<CatalogedBook>;
-    
+
     constructor(){
         this.catalogedBookList = new Array<CatalogedBook>();
     }
-    
+
     create(catalogedBook: CatalogedBook): CatalogedBook {
         var result = null;
         if(catalogedBook.book.name !== "" && catalogedBook.book.isbn !== "") {
@@ -63,7 +63,50 @@ export class CatalogedBooks{
         return result;
     };
     search(name:string, author:string, type:string): Array<CatalogedBook> {
-        return new Array<CatalogedBook>();
+        var list: Array<CatalogedBook> = new Array<CatalogedBook>();
+        if(name === "" && author === "" && type === "") {
+            list = this.catalogedBookList;
+        }
+        else {
+            for(var i = 0; i < this.catalogedBookList.length; i++) {
+                if(this.catalogedBookList[i].book.name === name &&
+                this.catalogedBookList[i].book.author === author &&
+                this.catalogedBookList[i].book.type === type) {
+                    list.push(this.catalogedBookList[i]);
+                }
+                else if(this.catalogedBookList[i].book.name === name &&
+                this.catalogedBookList[i].book.author === author &&
+                this.catalogedBookList[i].book.type === "") {
+                    list.push(this.catalogedBookList[i]);
+                }
+                else if(this.catalogedBookList[i].book.name === name &&
+                this.catalogedBookList[i].book.author === "" &&
+                this.catalogedBookList[i].book.type === type) {
+                    list.push(this.catalogedBookList[i]);
+                }
+                else if(this.catalogedBookList[i].book.name === "" &&
+                this.catalogedBookList[i].book.author === author &&
+                this.catalogedBookList[i].book.type === type) {
+                    list.push(this.catalogedBookList[i]);
+                }
+                else if(this.catalogedBookList[i].book.name === name &&
+                this.catalogedBookList[i].book.author === "" &&
+                this.catalogedBookList[i].book.type === "") {
+                    list.push(this.catalogedBookList[i]);
+                }
+                else if(this.catalogedBookList[i].book.name === "" &&
+                this.catalogedBookList[i].book.author === author &&
+                this.catalogedBookList[i].book.type === "") {
+                    list.push(this.catalogedBookList[i]);
+                }
+                else if(this.catalogedBookList[i].book.name === "" &&
+                this.catalogedBookList[i].book.author === "" &&
+                this.catalogedBookList[i].book.type === type) {
+                    list.push(this.catalogedBookList[i]);
+                }
+            }
+        }
+        return list;
     };
 
 }
