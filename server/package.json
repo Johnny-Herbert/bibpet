@@ -4,9 +4,9 @@
   "description": "servidor do bibpet",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run tsc && jasmine --config=./spec/support/jasmine.json",
     "tsc": "./node_modules/typescript/bin/tsc",
-    "start": "npm run tsc && node compiledCode/server.js"
+    "start": "npm run tsc && node compiledCode/server/server.js"
   },
   "author": "Jose Guilherme, Johnny Herbert, Samuel Oliveira, Vitor Souza e Cesar Silva",
   "license": "ISC",
@@ -18,5 +18,10 @@
     "express": "^4.17.1",
     "nodemon": "^1.19.4",
     "typescript": "^3.7.2"
+  },
+  "devDependencies": {
+    "typescript": "~3.5.3",
+    "jasmine": "^2.8.0",
+    "@types/jasmine": "^2.8.9"
   }
 }
