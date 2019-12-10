@@ -21,4 +21,12 @@ export class Reserve {
     disable_reserve(){
         this.active = false;
     };
+    equals(reserve: Reserve): boolean{
+        if(this.book.id === reserve.book.id && this.startDate === reserve.startDate &&
+            this.endDate === reserve.endDate && this.user.email === this.user.email){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
