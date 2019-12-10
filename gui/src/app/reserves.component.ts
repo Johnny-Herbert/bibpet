@@ -31,12 +31,11 @@ import { ReserveService } from './reserve.service';
     };
 
     extendReserve(reserve: Reserve): void {
-      var reserveOld = reserve;
+      this.removeReserve(reserve);
       reserve.endDate = this.newEndDate;
        this.reserveService.extendReserve(reserve).subscribe(
           ar => {
             if(ar){
-              this.removeReserve(reserveOld);
               this.activeReserves.push(ar);
             }
           },
@@ -55,13 +54,24 @@ import { ReserveService } from './reserve.service';
 
     ngOnInit(): void {
       this.reserveService.getActiveReserves().subscribe(
-          as => {this.activeReserves = as;},
-          msg => {
-            alert(msg.message);}
+        as => {
+          console.log(as);
+          this.activeReserves = as;
+        },
+        msg => {
+          console.log(msg.message);
+          alert(msg.message);
+        }
       );
       this.reserveService.getInactiveReserves().subscribe(
-          as => {this.inactiveReserves = as;},
-          msg => {alert(msg.message);}
+          as => {
+            console.log(as);
+            this.inactiveReserves = as;
+          },
+          msg => {
+            console.log(msg.message);
+            alert(msg.message);
+          }
       )
     }
   }
