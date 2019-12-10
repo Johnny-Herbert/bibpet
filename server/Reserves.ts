@@ -68,6 +68,13 @@ export class Reserves {
     logByDate(startDate: Date,endDate: Date){}
     logByEmail(email: String){}
     logByBook(id: number){}
-    actives(id_user: number){}
+    actives(id_user: String):Array<Reserve>{
+        var activeReserves = this.reserves.filter(reserve => (reserve.user.email === id_user && reserve.active));
+        return activeReserves;
+    }
+    inactives(id_user: String):Array<Reserve>{
+        var inactiveReserves = this.reserves.filter(reserve => (reserve.user.email === id_user && !reserve.active));
+        return inactiveReserves;
+    }
 
 }
