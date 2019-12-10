@@ -3,7 +3,6 @@ import { Reserve } from "../common/Reserve";
 export class Reserves {
     reserves: Array<Reserve>;;
 
-
     private validateReserve(reserve: Reserve):boolean{
         for(var i = 0; i < this.reserves.length; i++){
             if(reserve.book.id === this.reserves[i].book.id && 
@@ -45,8 +44,18 @@ export class Reserves {
         }
     }
     read(id: number){}
-    update(reserve: Reserve){}
-    delete(id: number){}
+    update(reserveToUp: Reserve,newReserv: Reserve){
+        
+    }
+    delete(reservetoDelete: Reserve){
+        var toDeleteIndex = this.reserves.findIndex(reserve => reserve.equals(reservetoDelete));
+        if(toDeleteIndex !== -1){
+            this.reserves.splice(toDeleteIndex,1);
+            return "Success";
+        }else{
+            return "Failure";
+        }
+    }
     log(){}
     logByDate(startDate: Date,endDate: Date){}
     logByEmail(email: String){}
