@@ -14,7 +14,7 @@ import { ReserveService } from './reserve.service';
  export class ReservesComponent implements OnInit {
     constructor(private reserveService: ReserveService) {}
 
-    newEndDate: Date;
+    newEndDate: String;
     activeReserves: Reserve[];
     inactiveReserves: Reserve[];
 
@@ -31,11 +31,12 @@ import { ReserveService } from './reserve.service';
     };
 
     extendReserve(reserve: Reserve): void {
-      this.removeReserve(reserve);
+      var reserveOld = reserve;
       reserve.endDate = this.newEndDate;
        this.reserveService.extendReserve(reserve).subscribe(
           ar => {
             if(ar){
+              this.removeReserve(reserveOld);
               this.activeReserves.push(ar);
             }
           },
@@ -55,7 +56,8 @@ import { ReserveService } from './reserve.service';
     ngOnInit(): void {
       this.reserveService.getActiveReserves().subscribe(
           as => {this.activeReserves = as;},
-          msg => {alert(msg.message);}
+          msg => {
+            alert(msg.message);}
       );
       this.reserveService.getInactiveReserves().subscribe(
           as => {this.inactiveReserves = as;},

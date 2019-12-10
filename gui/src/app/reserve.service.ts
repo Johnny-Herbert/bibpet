@@ -25,7 +25,7 @@ export class ReserveService {
     return this.http.put<any>(this.taURL + "/reserve",JSON.stringify(reserve), {headers: this.headers})
               .pipe( 
                 retry(2),
-                map( res => {if (res.success) {return reserve;} else {return null;}} )
+                map( res => {if (res.success) {return reserve} else {return res.conflict}} )
               ); 
   }
 
