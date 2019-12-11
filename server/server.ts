@@ -41,6 +41,16 @@ server.put('/comments', function(req: express.Request, res: express.Response) {
   }
 });
 
+server.delete('/comment/:id', function(req: express.Request, res: express.Response) {
+  var comment = comments.delete(+req.params.id);
+  if(comment) {
+    res.send({sucess: "O comentário foi excluido com sucesso"});
+  }
+  else {
+    res.send({error: "O comentário não pode ser excluido"});
+  }
+});
+
 
 var openServer = server.listen(3000, function () {
   console.log('listening port 3000!')
