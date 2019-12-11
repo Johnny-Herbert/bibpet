@@ -1,5 +1,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    margin-left: 44%;
-    margin-top: 12%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
