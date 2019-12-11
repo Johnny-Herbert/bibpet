@@ -6,17 +6,19 @@ import { User } from "../../common/User";
 describe("O cadastro de livros", () => {
     var register: CatalogedBooks;
 
+    const bookInstatiate = (id: number, name: string, isbn: string, author: string, edition: string, type: string): CatalogedBook => {
+      var book: Book = new Book(id, name, isbn, author, edition, type);
+      var user: User = new User("Cesar", "accs2@pet.cin.ufpe.br", "123");
+      var catalogedBook: CatalogedBook = new CatalogedBook(user, book);
+      return catalogedBook;
+    }
     const bookRegister = (name: string, isbn: string, author: string, edition: string, type: string) => {
-        var book: Book = new Book(1, name, isbn, author, edition, type);
-        var user: User = new User("Cesar", "accs2@pet.cin.ufpe.br", "123");
-        var catalogedBook: CatalogedBook = new CatalogedBook(user, book);
+        var catalogedBook = bookInstatiate(1,name, isbn, author, edition, type);
         return register.create(catalogedBook);
       }
 
     const bookUpdate = (id: number, name: string, isbn: string, author: string, edition: string, type: string) => {
-      var book: Book = new Book(id, name, isbn, author, edition, type);
-      var user: User = new User("Cesar", "accs2@pet.cin.ufpe.br", "123");
-      var catalogedBook: CatalogedBook = new CatalogedBook(user, book);
+      var catalogedBook = bookInstatiate(id, name, isbn, author, edition, type);
       return register.update(catalogedBook);
     }
 
