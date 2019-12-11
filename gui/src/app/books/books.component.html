@@ -1,7 +1,7 @@
 <body>
-    <li *ngFor="let user of logado">
+    <a *ngFor="let user of logado">
         Olá usuário {{logado}}
-    </li>
+    </a>
     <h2>Temos os seguintes livros</h2>
         <li *ngFor="let drop of drops">
             <a routerLink="/book" (click)="onSelect(drop)">
