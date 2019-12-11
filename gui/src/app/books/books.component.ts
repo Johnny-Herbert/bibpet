@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Title } from "@angular/platform-browser";
+//@ts-ignore
 import * as livrosS from '../book/livros.json';
 
 @Component({
