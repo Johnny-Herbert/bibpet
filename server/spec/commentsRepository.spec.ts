@@ -1,20 +1,14 @@
 import { Comment } from '../../common/Comment';
 import { Comments} from '../Comments';
 import { CatalogedBook } from '../../common/CatalogedBook';
-import { CatalogedBooks } from '../CatalogedBooks';
+import { CatalogedBooks } from '../CatalogedBooks'
 import { Book } from '../../common/Book'
 import { User } from '../../common/User'
-import { Users } from '../Users';
 
 describe("O cadastro de comentários", () => {
-  var comments : Comments;
-  var catalogeds : CatalogedBooks;
-  var users : Users;
+  var comments: Comments = new Comments();
+  var catalogeds: CatalogedBooks = new CatalogedBooks();
 
-  const userRegister = (name: string, email: string, password: string):User => {
-      var user: User = new User(name, email, password);
-      return users.create(user);
-  }
 
   const bookRegister = (name: string, isbn: string, author: string, edition: string, type: string):CatalogedBook => {
     var book: Book = new Book(1, name, isbn, author, edition, type);
@@ -31,7 +25,7 @@ describe("O cadastro de comentários", () => {
   }
 
   const commentBook = (text: string):Comment => {
-      var user = userRegister("Samuel", "som3@pet.ufpe.br", "451452sam")
+      var user:User = new User("Samuel", "som3@pet.ufpe.br", "451452sam")
       var catalogedBook = bookRegister("Metodologia ágil", "12524151254", "Patterson", "7", "Engenharia de software");
       return commentRegister(catalogedBook,1,text, user);
   }
@@ -48,7 +42,7 @@ describe("O cadastro de comentários", () => {
       expect(comments.read().length).toBe(1);
       var commented = comments.read()[0];
       expect(commented.id).toBe(1);
-      expect(commented.text).toBe("Amei o livroo");
+      expect(commented.text).toBe("Ameiii o livro gente!");
       expect(commented.user.name).toBe("Samuel");
       expect(commented.user.email).toBe("som3@pet.ufpe.br");
 
