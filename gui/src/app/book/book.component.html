@@ -8,6 +8,10 @@
         Tipo: {{drop.type}} <br>
         Comentários: {{drop.commentsLists}} <br><br>
     </li>
+    <a>Alugar por: </a>
+    <input placeholder="DD/MM/AAAA"> 
+    <br><a>OBS: Deixe em branco para pegar hoje</a>
+    <br><br><br>
     <br><button (click)="pegar()">Peguei o livro</button>
     <button (click)="devolver()">Devolver o livro</button>
     <br><button routerLink="/books">Voltar</button>
