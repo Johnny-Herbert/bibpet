@@ -6,12 +6,32 @@ export class Comments{
         this.commentList = new Array<Comment>();
     }
 
-    create(comment: Comment): Comment{
-        return
-    };
+    create(newComment: Comment): Comment {
+        if(!this.commentList.find(a => a.id == newComment.id)) {
+            this.commentList.push(newComment)
+            return newComment;
+        }
+    } 
+    
     read(): Array<Comment>{
-        return
+        return this.commentList;
     };
-    update(comment: Comment){};
-    delete(id:number){};
+
+    update(newComment: Comment): Comment {
+        var result: Comment = this.commentList.find(a => a.id == newComment.id)
+        if(result && newComment.text !== "") {
+            result.text = newComment.text;
+        return result;
+        }
+    }
+
+    delete(id:number): Comment{
+        for(var i = 0; i < this.commentList.length; i++) {
+            if(this.commentList[i].id = id) {
+                var result = this.commentList[i];
+                this.commentList.splice(i,1);
+                return result;
+            }
+        }
+    }
 }
