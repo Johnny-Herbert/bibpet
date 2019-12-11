@@ -25,19 +25,19 @@ export class ReserveService {
     return this.http.put<any>(this.taURL + "/reserve",JSON.stringify(reserve), {headers: this.headers})
               .pipe( 
                 retry(2),
-                map( res => {if (res.success) {return reserve} else {return res.conflict}} )
+                map( res => {if (res.success) {return reserve} else {return res.body}} )
               ); 
   }
 
   getActiveReserves(): Observable<Reserve[]> {
-    return this.http.get<Reserve[]>(this.taURL + "/activeReserves")
+    return this.http.get<Reserve[]>(this.taURL + "/activeReserves/")
               .pipe(
                  retry(2)
                );
   }
 
   getInactiveReserves(): Observable<Reserve[]> {
-    return this.http.get<Reserve[]>(this.taURL + "/inactiveReserves")
+    return this.http.get<Reserve[]>(this.taURL + "/inactiveReserves/")
               .pipe(
                  retry(2)
                );

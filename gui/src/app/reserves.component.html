@@ -26,11 +26,11 @@
     <th>Data de Inicio</th>
     <th>Data de Entrega</th>
 </tr>
-<tr *ngFor="let a of inactiveReserves" name="inactive-reserve-list">
-    <td name="inactive-reserve-book-id-list">{{a.book.id}}</td>
-    <td name="inactive-reserve-book-name-list">{{a.book.name}}</td>
-    <td name="inactive-reserve-date-start-list">{{a.startDate}}</td>
-    <td name="inactive-reserve-date-end-list">{{a.endDate}}</td>
+<tr *ngFor="let b of inactiveReserves" name="inactive-reserve-list">
+    <td name="inactive-reserve-book-id-list">{{b.book.id}}</td>
+    <td name="inactive-reserve-book-name-list">{{b.book.name}}</td>
+    <td name="inactive-reserve-date-start-list">{{b.startDate}}</td>
+    <td name="inactive-reserve-date-end-list">{{b.endDate}}</td>
     <td><button name= "comment-button">Comentar</button></td>
 </tr>
 </table>

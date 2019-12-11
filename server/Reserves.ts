@@ -5,10 +5,12 @@ export class Reserves {
 
     private validateReserve(reserveToDo: Reserve,reserveDone: Reserve):boolean{
         if(reserveToDo.book.id === reserveDone.book.id && 
-            reserveDone.active === true && this.verifyConflict(reserveToDo,reserveDone)&&
-            this.verifyConflict(reserveDone,reserveToDo)){
+            reserveDone.active === true && (this.verifyConflict(reserveToDo,reserveDone) ||
+            this.verifyConflict(reserveDone,reserveToDo))){
+                console.log("Validate True");
                 return true;
         }else{
+            console.log("Validate False");
             return false;
         }
     }
@@ -17,19 +19,25 @@ export class Reserves {
                 this.dateGreaterThan(reserveDone.endDate,reserveToDo.startDate)) ||
            (this.dateGreaterThan(reserveToDo.endDate,reserveDone.startDate) && 
                 this.dateGreaterThan(reserveDone.endDate,reserveToDo.endDate))){
+                    console.log("Verify True");
                     return true;
         }else{
+            console.log("Verify False");
             return false;
         }
     }
     private dateGreaterThan(dateGrater: String, dateThan: String):boolean{
+        console.log(dateGrater);
+        console.log(dateThan);
         var arrayDateGrater = dateGrater.split('/');
         var arrayDateThan = dateThan.split('/');
         if((arrayDateGrater[2] > arrayDateThan[2]) ||
            (arrayDateGrater[1] > arrayDateThan[1]) ||
            (arrayDateGrater[0] > arrayDateThan[0])){
+            console.log("Date True");
             return true;
         }else{
+            console.log("Date False");
             return false;
         }
     }
@@ -44,10 +52,11 @@ export class Reserves {
 
     
     create(reserveToDo: Reserve):Object{
-        var reserveConflicts = this.reserves.filter(reserve => this.validateReserve(reserveToDo,reserve));
+        var reserveConflicts = this.reserves.filter(reserve => (this.validateReserve(reserveToDo,reserve)));
         var answer;
         if(reserveConflicts.length === 0){
             this.reserves.push(reserveToDo);
+            console.log("Create");
             console.log(this.reserves);
             answer = [reserveToDo,"Success"];
             return answer;
@@ -64,6 +73,8 @@ export class Reserves {
         if(toUpIndex !== -1 && newReserveConflicts.length <= 1){
             this.reserves[toUpIndex] = newReserve;
             answer = [newReserve,"Success"];
+            console.log("Update");
+            console.log(this.reserves);
             return answer;
         }else{
             answer = [newReserveConflicts,"Failure"];
@@ -74,6 +85,8 @@ export class Reserves {
         var toDeleteIndex = this.reserves.findIndex(reserve => this.sameReserve(reservetoDelete,reserve));
         if(toDeleteIndex !== -1){
             this.reserves[toDeleteIndex].active = false;
+            console.log("Delete");
+            console.log(this.reserves);
             return "Success";
         }else{
             return "Failure";
@@ -85,12 +98,16 @@ export class Reserves {
     logByBook(id: number){}
     actives(email: String):Array<Reserve>{
         email = email.substring(10,email.length-2);
+        console.log(email);
         var activeReserves = this.reserves.filter(reserve => (reserve.active && reserve.user.email == email));
+        console.log(activeReserves);
         return activeReserves;
     }
     inactives(email: String):Array<Reserve>{
         email = email.substring(10,email.length-2);
+        console.log(email);
         var inactiveReserves = this.reserves.filter(reserve => (!reserve.active && reserve.user.email == email));
+        console.log(inactiveReserves);
         return inactiveReserves;
     }
 

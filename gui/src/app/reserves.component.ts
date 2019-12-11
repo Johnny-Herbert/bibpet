@@ -54,9 +54,9 @@ import { ReserveService } from './reserve.service';
 
     ngOnInit(): void {
       this.reserveService.getActiveReserves().subscribe(
-        as => {
-          console.log(as);
-          this.activeReserves = as;
+        response => {
+          console.log(response);
+          this.activeReserves = response;
         },
         msg => {
           console.log(msg.message);

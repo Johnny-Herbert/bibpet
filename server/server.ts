@@ -25,13 +25,13 @@ server.listen(3000, function () {
 })
 
 server.get('/activeReserves',function(req: express.Request, res: express.Response){
-  var email = req.body;
-  res.send(JSON.stringify(reserves.actives(JSON.stringify(email))));
+  //var email = req.body;
+  res.send(JSON.stringify(reserves.actives(JSON.stringify({"email":"accs2"}))));
 })
 
 server.get('/inactiveReserves',function(req: express.Request, res: express.Response){
-  var email:String = req.body;
-  res.send(JSON.stringify(reserves.inactives(JSON.stringify(email))));
+  //var email:String = req.body;
+  res.send(JSON.stringify(reserves.inactives(JSON.stringify({"email":"accs2"}))));
 })
 
 server.post('/reserve',function(req: express.Request, res: express.Response){
