@@ -69,44 +69,37 @@ export class CatalogedBooks{
         }
         else {
             for(var i = 0; i < this.catalogedBookList.length; i++) {
-                if(this.catalogedBookList[i].book.name === name &&
-                this.catalogedBookList[i].book.author === author &&
-                this.catalogedBookList[i].book.type === type) {
+                if(this.fieldsValidate(this.catalogedBookList[i], name, author, type)) {
                     list.push(this.catalogedBookList[i]);
                 }
-                else if(this.catalogedBookList[i].book.name === name &&
-                this.catalogedBookList[i].book.author === author &&
-                this.catalogedBookList[i].book.type === "") {
+                else if(this.fieldsValidate(this.catalogedBookList[i], name, author, "")) {
                     list.push(this.catalogedBookList[i]);
                 }
-                else if(this.catalogedBookList[i].book.name === name &&
-                this.catalogedBookList[i].book.author === "" &&
-                this.catalogedBookList[i].book.type === type) {
+                else if(this.fieldsValidate(this.catalogedBookList[i], name, "", type)) {
                     list.push(this.catalogedBookList[i]);
                 }
-                else if(this.catalogedBookList[i].book.name === "" &&
-                this.catalogedBookList[i].book.author === author &&
-                this.catalogedBookList[i].book.type === type) {
+                else if(this.fieldsValidate(this.catalogedBookList[i], "", author, type)) {
                     list.push(this.catalogedBookList[i]);
                 }
-                else if(this.catalogedBookList[i].book.name === name &&
-                this.catalogedBookList[i].book.author === "" &&
-                this.catalogedBookList[i].book.type === "") {
+                else if(this.fieldsValidate(this.catalogedBookList[i], name, "", "")) {
                     list.push(this.catalogedBookList[i]);
                 }
-                else if(this.catalogedBookList[i].book.name === "" &&
-                this.catalogedBookList[i].book.author === author &&
-                this.catalogedBookList[i].book.type === "") {
+                else if(this.fieldsValidate(this.catalogedBookList[i], "", author, "")) {
                     list.push(this.catalogedBookList[i]);
                 }
-                else if(this.catalogedBookList[i].book.name === "" &&
-                this.catalogedBookList[i].book.author === "" &&
-                this.catalogedBookList[i].book.type === type) {
+                else if(this.fieldsValidate(this.catalogedBookList[i], "", "", type)) {
                     list.push(this.catalogedBookList[i]);
                 }
             }
         }
         return list;
     };
-
+    fieldsValidate(catalogedBook: CatalogedBook, name: string, author: string, type: string): boolean {
+        if(catalogedBook.book.name === name && catalogedBook.book.author === author && catalogedBook.book.type === type) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
