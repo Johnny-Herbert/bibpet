@@ -31,6 +31,16 @@ server.get('/comments', function(req: express.Request, res: express.Response) {
   res.send(JSON.stringify(comments.read()));
 });
 
+server.put('/comments', function(req: express.Request, res: express.Response) {
+  var comment: Comment = comments.update(req.body);
+  if(comment) {
+    res.send({sucess: "O comentário foi atualizado com sucesso"});
+  }
+  else {
+    res.send({error: "O comentário não foi atualizado com sucesso"});
+  }
+});
+
 
 var openServer = server.listen(3000, function () {
   console.log('listening port 3000!')
