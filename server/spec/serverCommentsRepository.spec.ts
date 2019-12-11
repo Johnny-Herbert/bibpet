@@ -20,4 +20,14 @@ describe("O servidor", () => {
              );
   })
 
+  it("insere comentários corretamente", () => {
+  var options:any = {method: 'POST', uri: (base_url + "comment"), body:{ id: 1, text: "O livro é muito bom!!", user: {name: "Johnny", email: "jhmn@pet.cin.ufpe.br", password: "5142"}}, json: true};
+    return request(options)
+             .then(body =>
+                expect(body).toEqual({sucess: "O comentário foi adicionado com sucesso"})
+             ).catch(e =>
+                expect(e).toEqual(null)
+             )
+  });
+
 });
