@@ -9,11 +9,11 @@ export class Reserves {
         this.reserves = new Array<Reserve>();
     }
     create(reserve: Reserve): Reserve {
-
-        return new Reserve(new User("", "", ""), new Book(1,"","","","",""), new Date(), new Date(), false);
+        this.reserves.push(reserve)
+        return reserve
     }
-    read(id: number): Array<Reserve> {
-        return new Array<Reserve>();
+    read(): Array<Reserve> {
+        return this.reserves;
     }
     update(reserve: Reserve): Reserve {
         return new Reserve(new User("", "", ""), new Book(1,"","","","",""), new Date(), new Date(), false);
@@ -21,17 +21,19 @@ export class Reserves {
     delete(id: number): Reserve {
         return new Reserve(new User("", "", ""), new Book(1,"","","","",""), new Date(), new Date(), false);
     }
-    log(): Array<Reserve> {
-        return new Array<Reserve>();
+    log(id: number,startDate: Date,endDate: Date): Array<Reserve> {
+        return this.reserves.filter(reserve => (reserve.startDate.getTime() >= startDate.getTime() &&
+        reserve.endDate.getTime() <= endDate.getTime()))
     }
     logByDate(startDate: Date,endDate: Date): Array<Reserve> {
-        return new Array<Reserve>();
+        return this.reserves.filter( reserve => (reserve.startDate.getTime() >= startDate.getTime() &&
+                    reserve.endDate.getTime() <= endDate.getTime()))
     }
     logByEmail(email: String): Array<Reserve> {
-        return new Array<Reserve>();
+        return this.reserves.filter(reserve => reserve.user.email === email)
     }
     logByBook(id: number): Array<Reserve> {
-        return new Array<Reserve>();
+        return this.reserves.filter(reserve => this.reserves.filter( reserve => reserve.book.id === id))
     }
     checkAvailability(id: number,startDate: Date,endDate: Date): Array<Reserve> {
         return new Array<Reserve>();
