@@ -19,6 +19,18 @@ export class BookComponent implements OnInit {
 
   }
 
+  pegar(){
+    let hoje: Date =  new Date();
+    let confirmacao = this.cookieService.get('bookSelected') + " emprestado para " + this.cookieService.get('user') + ' no dia ' + hoje.getDate() + '/' + hoje.getMonth() + '/' + hoje.getFullYear();
+    alert(confirmacao);
+  }
+
+  devolver(){
+    let hoje: Date =  new Date();
+    let confirmacao = this.cookieService.get('bookSelected') + " devolvido por " + this.cookieService.get('user') + ' no dia' + hoje.getDate() + '/' + hoje.getMonth() + '/' + hoje.getFullYear();
+    alert(confirmacao);
+  }
+
   sair(){
     this.cookieService.deleteAll('/', '');
     this.cookieService.deleteAll('/admin', '');
