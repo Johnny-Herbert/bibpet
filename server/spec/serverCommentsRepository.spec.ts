@@ -29,5 +29,18 @@ describe("O servidor", () => {
                 expect(e).toEqual(null)
              )
   });
+  
+  it("atualiza comentários corretamente", () => {
+      return request.post(base_url + "comment", {"json":{id: 1, text: "O livro é muito bom!!", user: {name: "Johnny", email: "jhmn@pet.cin.ufpe.br", password: "5142"}}}).then(body => {
+          expect(body).toEqual({success: "O comentário foi adicionado com sucesso"});
+          return request.put(base_url + "comment", {"json":{id: 1, text: "Ainda precisa ser traduzido melhor", user: {name: "Johnny", email: "jhmn@pet.cin.ufpe.br", password: "5142"}}}).then(body => {
+              expect(body).toEqual({success: "O comentário foi atualizado com sucesso"});
+              return (request.get(base_url + "comments").then(body => {
+                  expect(body).toContain('{"id":"1", "text":"Ainda precisa ser traduzido melhor", "user": {"name":"Johnny", "email" : "jhmn@pet.cin.ufpe.br", "password" : "5142"}}');
+                  expect(body).not.toContain('{"id":"1", "text":"O livro é muito bom!!", "user": {"name":"Johnny", "email" : "jhmn@pet.cin.ufpe.br", "password" : "5142"}}');
+              }))
+          })
+      })
+  })
 
 });
