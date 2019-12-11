@@ -27,6 +27,10 @@ server.post('/comment', function(req: express.Request, res: express.Response) {
   }
 });
 
+server.get('/comments', function(req: express.Request, res: express.Response) {
+  res.send(JSON.stringify(comments.read()));
+});
+
 
 var openServer = server.listen(3000, function () {
   console.log('listening port 3000!')
