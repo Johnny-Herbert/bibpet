@@ -1,38 +1,41 @@
 <html>
 <h2>Reservas Ativas</h2>
 <table>
- <tr>
-    <th>ID</th>
-    <th>Nome do Livro</th>
-    <th>Data de Inicio</th>
-    <th>Data de Entrega</th>
- </tr>
- <tr *ngFor="let a of activeReserves" name="active-reserve-list">
-    <td name="active-reserve-book-id-list">{{a.book.id}}</td>
-    <td name="active-reserve-book-name-list">{{a.book.name}}</td>
-    <td name="active-reserve-date-start-list">{{a.startDate}}</td>
-    <td name="active-reserve-date-end-list">{{a.endDate}}</td>
-    <td><input name= "new-endDate-box" placeholder="dd/mm/yyyy" [(ngModel)]="newEndDate"></td>
-    <td><button name= "extend-button" (click)="extendReserve(a)">Estender</button></td>
-    <td><button name= "cancel-button" (click)="cancelReserve(a)">Cancelar</button></td>
-    <td><button name= "disable-button">Devolver</button></td>
- </tr>
-</table>
-<h2>Reservas Inativas</h2>
-<table>
-<tr>
-    <th>ID</th>
-    <th>Nome do Livro</th>
-    <th>Data de Inicio</th>
-    <th>Data de Entrega</th>
-</tr>
-<tr *ngFor="let b of inactiveReserves" name="inactive-reserve-list">
-    <td name="inactive-reserve-book-id-list">{{b.book.id}}</td>
-    <td name="inactive-reserve-book-name-list">{{b.book.name}}</td>
-    <td name="inactive-reserve-date-start-list">{{b.startDate}}</td>
-    <td name="inactive-reserve-date-end-list">{{b.endDate}}</td>
-    <td><button name= "comment-button">Comentar</button></td>
-</tr>
-</table>
+      <tr>
+         <th>ID</th>
+         <th>Nome do Livro</th>
+         <th>Data de Inicio</th>
+         <th>Data de Entrega</th>
+      </tr>
+      <tr *ngFor="let a of activeReserves; let i = index" name="active-reserve-list">
+         <td name="active-reserve-book-id-list-$i" id={{i}}>   {{a.book.id}}</td>
+         <td name="active-reserve-book-name-list" id={{i}}>    {{a.book.name}}</td>
+         <td name="active-reserve-date-start-list" id={{i}}>   {{a.startDate}}</td>
+         <td name="active-reserve-date-end-list" id={{i}}>     {{a.endDate}}</td>
+         <div>
+            <input name="new-endDate-box-{{i}}" placeholder="dd/mm/yyyy" [(ngModel)]="newEndDate">
+         </div>
+         <td><button name="extend-button-{{$i}}" id={{i}} (click)="extendReserve(a)">Estender</button></td>
+         <td><button name="cancel-button-{{$i}}" id={{i}} (click)="cancelReserve(a)">Cancelar</button></td>
+         <td><button name="disable-button-{{$i}}">Devolver</button></td>
+      </tr>
+     </table>
+     <h2>Reservas Inativas</h2>
+     <table>
+     <tr>
+         <th>ID</th>
+         <th>Nome do Livro</th>
+         <th>Data de Inicio</th>
+         <th>Data de Entrega</th>
+     </tr>
+     <tr *ngFor="let b of inactiveReserves" name="inactive-reserve-list">
+         <td name="inactive-reserve-book-id-list">{{b.book.id}}</td>
+         <td name="inactive-reserve-book-name-list">{{b.book.name}}</td>
+         <td name="inactive-reserve-date-start-list">{{b.startDate}}</td>
+         <td name="inactive-reserve-date-end-list">{{b.endDate}}</td>
+         <td><button name= "comment-button">Comentar</button></td>
+     </tr>
+     </table>
 
 </html>
+

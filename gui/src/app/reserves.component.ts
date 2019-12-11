@@ -14,10 +14,11 @@ import { ReserveService } from './reserve.service';
  export class ReservesComponent implements OnInit {
     constructor(private reserveService: ReserveService) {}
 
+   //inputField = ['','','','','','','','','','','','']
     newEndDate: String;
     activeReserves: Reserve[];
     inactiveReserves: Reserve[];
-
+    
     removeReserve(reserve: Reserve): Reserve{
       for(var i = 0; i <  this.activeReserves.length; i++){
         var activeR = this.activeReserves[i];
@@ -27,51 +28,52 @@ import { ReserveService } from './reserve.service';
             this.activeReserves.splice(i,1);
             return reserveAux;
           }
-      }
-    };
-
-    extendReserve(reserve: Reserve): void {
-      this.removeReserve(reserve);
-      reserve.endDate = this.newEndDate;
-       this.reserveService.extendReserve(reserve).subscribe(
+        }
+      };
+      
+      extendReserve(reserve: Reserve): void {
+        this.removeReserve(reserve);
+        reserve.endDate = this.newEndDate;
+        this.reserveService.extendReserve(reserve).subscribe(
           ar => {
             if(ar){
               this.activeReserves.push(ar);
             }
           },
           msg => {alert(msg.message);}
-       );
-    }
-
-    cancelReserve(reserve: Reserve): void{
-      this.reserveService.cancelReserve(reserve).subscribe(
-          ar => {
-            this.removeReserve(ar);
-          },
-          msg => {alert(msg.message);}
-      );
-    }
-
-    ngOnInit(): void {
-      this.reserveService.getActiveReserves().subscribe(
-        response => {
-          console.log(response);
-          this.activeReserves = response;
-        },
-        msg => {
-          console.log(msg.message);
-          alert(msg.message);
+          );
         }
-      );
-      this.reserveService.getInactiveReserves().subscribe(
-          as => {
-            console.log(as);
-            this.inactiveReserves = as;
-          },
-          msg => {
-            console.log(msg.message);
-            alert(msg.message);
+        
+        cancelReserve(reserve: Reserve): void{
+          this.reserveService.cancelReserve(reserve).subscribe(
+            ar => {
+              this.removeReserve(ar);
+            },
+            msg => {alert(msg.message);}
+            );
           }
-      )
-    }
+          
+          ngOnInit(): void {
+            this.reserveService.getActiveReserves().subscribe(
+              response => {
+                console.log(response);
+                this.activeReserves = response;
+              },
+              msg => {
+                console.log(msg.message);
+                alert(msg.message);
+              }
+              );
+              this.reserveService.getInactiveReserves().subscribe(
+                as => {
+                  console.log(as);
+                  this.inactiveReserves = as;
+                },
+                msg => {
+                  console.log(msg.message);
+                  alert(msg.message);
+                }
+                )
+
+              }
   }
