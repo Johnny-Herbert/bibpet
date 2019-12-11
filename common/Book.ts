@@ -13,6 +13,7 @@ export class Book {
         this.id  = id;
         this.name = name;
         this.isbn = isbn;
+        this.author = author;
         this.edition = edition;
         this.type = type;
         this.commentsLists = new Comments();
