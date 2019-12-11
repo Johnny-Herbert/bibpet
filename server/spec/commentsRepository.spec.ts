@@ -53,4 +53,19 @@ describe("O cadastro de comentários", () => {
       expect(commented.user.email).toBe("som3@pet.ufpe.br");
 
   })
+
+  it("atualiza comentários corretamente", () => {
+      var comment = commentBook("Ameiii o livro gente!");
+      comment.text = "Talvez não amei tanto assim";
+      comments.update(comment)
+
+      expect(comments.read().length).toBe(1);
+      var commented = comments.read()[0];
+      expect(commented.id).toBe(1);
+      expect(commented.text).toBe("Talvez não amei tanto assim");
+      expect(commented.user.name).toBe("Samuel");
+      expect(commented.user.email).toBe("som3@pet.ufpe.br");
+
+  })
+
   })
