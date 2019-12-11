@@ -68,4 +68,11 @@ describe("O cadastro de comentários", () => {
 
   })
 
+  it("Remove comentários corretamente", () => {
+    var comment = commentBook("O livro era muito incompleto! Falta questões.");
+    expect(comments.read().length).toBe(1);
+    comments.delete(comment.id);
+
+    expect(comments.read().length).toBe(0);
+  })
   })
