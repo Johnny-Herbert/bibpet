@@ -14,8 +14,8 @@ export class BookSearchComponent implements OnInit {
   catalogedBook: CatalogedBook = new CatalogedBook(new User("", "", ""), new Book(1,"","","","",""));
   constructor(private catalogedBookServer: CatalogedBookService) { }
 
-  search(name: string, author: string, type: string) {
-    this.catalogedBookServer.search(name, author, type)
+  search(book: CatalogedBook) {
+    this.catalogedBookServer.search(book.book.name, book.book.author, book.book.type)
       .subscribe(
         bo => {
           if (bo) {
