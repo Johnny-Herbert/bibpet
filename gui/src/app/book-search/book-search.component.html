@@ -1,3 +1,35 @@
 <html>
-    <p>book-search works!</p>
+        <table>
+                <tr>
+                   <td><label>Nome </label></td>
+                   <td><input [(ngModel)]="catalogedBook.nome" name="book-name-box"></td>
+                   <td><button (click)="search(catalogedBook)" name="search-book-button">Pesquisar</button></td>
+                </tr>
+                <tr>
+                   <td><label>Author </label></td>
+                   <td><input [(ngModel)]="catalogedBook.author" name="book-author-box"></td>
+                </tr>
+                <tr>
+                   <td><label>Tópico </label></td>
+                   <td><input [(ngModel)]="catalogedBook.type" name="book-type-box"></td>
+                </tr>
+                </table>
+        <table>
+            <tr *ngIf="catalogedBooks.length > 0">
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>e-mail</th>
+            </tr>
+            <tr *ngFor="let b of catalogedBooks" name="book-list">
+                <td name="book-name-list">{{b.book.name}}</td>
+                <td name="book-author-list">{{b.book.author}}</td>
+                <td name="book-type-list">{{b.book.type}}</td>
+                <td><button>Reservar</button></td>
+                <td><button>Remover</button></td>
+                <td><button>Editar</button></td>
+                <td><button>Detalhes</button></td>
+            </tr>
+        </table>
+        <p>book-search works!</p>
+
 </html>
