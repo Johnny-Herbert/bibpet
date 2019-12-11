@@ -2,7 +2,7 @@ import { browser, Config } from 'protractor';
 
 export let config: Config = {
 
-    //seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
+    seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
 
     SELENIUM_PROMISE_MANAGER: false,
 
@@ -14,7 +14,7 @@ export let config: Config = {
     frameworkPath: require.resolve('protractor-cucumber-framework'),
 
     specs: [
-        '../features/*.feature'
+        '../../features/*.feature'
     ],
 
     onPrepare: () => {
@@ -27,6 +27,6 @@ export let config: Config = {
         compiler: "ts:ts-node/register",
         strict: true,
         format: ['pretty'],
-        require: ['../stepdefinitions/*.ts'],
+        require: ['../../stepdefinitions/notification.ts'],
     }
 };
