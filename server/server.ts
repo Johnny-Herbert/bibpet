@@ -1,8 +1,12 @@
 import express = require('express');
 import bodyParser = require("body-parser");
+import { Comments } from "./Comments";
+import { Comment } from '../common/Comment';
 
 
 var server = express();
+
+var comments: Comments = new Comments();
 
 var allowCrossDomain = function(req: any, res: any, next: any) {
     res.header('Access-Control-Allow-Origin', "*");
@@ -13,10 +17,23 @@ var allowCrossDomain = function(req: any, res: any, next: any) {
 server.use(allowCrossDomain);
 server.use(bodyParser.json());
 
-server.get('/', function (req: express.Request, res: express.Response) {
-  res.send("Hello Word");
-})
+server.post('/comment', function(req: express.Request, res: express.Response) {
+  var comment: Comment = comments.create(req.body);
+  if(comment) {
+    res.send({sucess: "O comentário foi adicionado com sucesso"});
+  }
+  else {
+    res.send({error: "O comentário não foi adicionado com sucesso"});
+  }
+});
 
-server.listen(3000, function () {
+
+var openServer = server.listen(3000, function () {
   console.log('listening port 3000!')
 })
+
+function closeServer(): void {
+  openServer.close();
+}
+
+export { openServer, closeServer }
