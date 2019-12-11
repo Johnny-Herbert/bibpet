@@ -1,4 +1,4 @@
-import { Comments } from "./Comments";
+import { Comments } from "../server/Comments";
 
 export class Book {
     id: number;

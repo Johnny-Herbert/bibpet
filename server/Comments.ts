@@ -1,4 +1,4 @@
-import { Comment } from "./Comment";
+import { Comment } from "../common/Comment";
 export class Comments{
     commentList: Array<Comment>;
     
@@ -6,8 +6,12 @@ export class Comments{
         this.commentList = new Array<Comment>();
     }
 
-    create(comment: Comment){};
-    read(id:number){};
+    create(comment: Comment): Comment{
+        return
+    };
+    read(): Array<Comment>{
+        return
+    };
     update(comment: Comment){};
     delete(id:number){};
 }
